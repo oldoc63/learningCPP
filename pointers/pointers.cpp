@@ -1,15 +1,38 @@
 #include <cstdio>
 
-struct College {
-  char name[256];
+struct ClockOfTheLongNow {
+  ClockOfTheLongNow(int year_in) {
+    if(!set_year(year_in)) {
+      year = 2019;
+    }
+  }
+  ClockOfTheLongNow() {
+    year = 2019;
+  }
+  void add_year() {
+    year++;
+  }
+  bool set_year(int new_year) {
+    if(new_year < 2019)
+      return false;
+    year = new_year;
+    return true;
+  }
+  int get_year() {
+    return year;
+  }
+
+  private:
+  int year;
 };
 
-void print_names(College* colleges, size_t n_colleges) {
-  for(size_t i = 0; i < n_colleges; i++) {
-    printf("%s College\n", colleges[i].name);
-  }
+void add_year(ClockOfTheLongNow& clock) {
+  clock.set_year(clock.get_year() + 1); // No deref operator needed
 }
 
 int main() {
-  College oxford[] = { "Magdalen", "Nuffield", "Kellogg" };
-  print_names(oxford, sizeof(oxford) / sizeof(College));
+  ClockOfTheLongNow clock;
+  printf("The year is %d.\n", clock.get_year());
+  add_year(clock); // Clock is implicitly passed by reference!
+  printf("The year is %d.\n", clock.get_year());
+}
