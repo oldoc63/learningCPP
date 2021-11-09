@@ -1,38 +1,30 @@
 #include <cstdio>
 
-struct ClockOfTheLongNow {
-  ClockOfTheLongNow(int year_in) {
-    if(!set_year(year_in)) {
-      year = 2019;
-    }
+struct Element {
+  Element* next{};
+  void insert_after(Element* new_element) {
+    new_element->next = next;
+    next = new_element;
   }
-  ClockOfTheLongNow() {
-    year = 2019;
-  }
-  void add_year() {
-    year++;
-  }
-  bool set_year(int new_year) {
-    if(new_year < 2019)
-      return false;
-    year = new_year;
-    return true;
-  }
-  int get_year() {
-    return year;
-  }
-
-  private:
-  int year;
+  char prefix[2];
+  short operating_number;
 };
 
-void add_year(ClockOfTheLongNow& clock) {
-  clock.set_year(clock.get_year() + 1); // No deref operator needed
-}
-
 int main() {
-  ClockOfTheLongNow clock;
-  printf("The year is %d.\n", clock.get_year());
-  add_year(clock); // Clock is implicitly passed by reference!
-  printf("The year is %d.\n", clock.get_year());
+  Element trooper1, trooper2, trooper3;
+  trooper1.prefix[0] = 'T';
+  trooper1.prefix[1] = 'K';
+  trooper1.operating_number = 421;
+  trooper1.insert_after(&trooper2);
+  trooper2.prefix[0] = 'F';
+  trooper2.prefix[1] = 'N';
+  trooper2.operating_number = 2187;
+  trooper2.insert_after(&trooper3);
+  trooper3.prefix[0] = 'L';
+  trooper3.prefix[1] = 'S';
+  trooper3.operating_number = 005;
+
+  for(Element* cursor = &trooper1; cursor; cursor = cursor->next) {
+    printf("Storm Trooper %c%c-%d\n", cursor->prefix[0], cursor->prefix[1], cursor->operating_number);
+  }
 }
