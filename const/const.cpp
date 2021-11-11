@@ -22,6 +22,13 @@ struct ClockOfTheLongNow {
     return year;
   }
 
+  bool is_leap_year(const ClockOfTheLongNow& clock) {
+  if (clock.get_year() % 4 > 0) return false;
+  if (clock.get_year() % 100 > 0) return true;
+  if (clock.get_year() % 400 > 0) return false;
+  return true;
+}
+
   private:
   int year;
 };
