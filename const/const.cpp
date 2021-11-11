@@ -33,7 +33,7 @@ struct ClockOfTheLongNow {
   int year;
 };
 
-struct Avout {
+struct Avout { 
   Avout(const char* name, int year_of_apert)
       : name{ name }
       , apert{ year_of_apert } {}
