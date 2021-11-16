@@ -15,9 +15,11 @@ struct SimpleString {
   ~SimpleString() {
     delete[] buffer;
   }
+//Add print method  
   void print(const char* tag) const {
     printf("%s: %s", tag, buffer);
   }
+//Add append_line method
   bool append_line(const char* x) {
     const auto x_len = strlen(x);
     if(x_len + length + 2 > max_size)
