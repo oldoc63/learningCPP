@@ -38,13 +38,17 @@ struct SimpleString {
 };
 
 int main() {
+//Create a simple string with max_length=115
   SimpleString string{ 115 };
+//Use the append_line method twice
   string.append_line("Starbuck, whaddya hear?");
   string.append_line("Nothin' but the rain.");
+//Print the contents along with tag A
   string.print("A");
   string.append_line("Grab your gun and bring the cat in.");
   string.append_line("Aye-aye sir, coming home.");
   string.print("B");
+//It will return false cause there is no more space in the buffer
   if(!string.append_line("Galactica!")) {
     printf("String was not big enough to append another message.");
   }
